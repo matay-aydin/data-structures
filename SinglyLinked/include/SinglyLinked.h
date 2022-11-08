@@ -35,8 +35,8 @@ public:
     bool isEmpty() const;
     /// @brief Checks wether the given parameter is stored somewhere in the list.
     /// @param data
-    /// @return true if the data member of a node stores same value as the parameter.
-    bool hasData(const T &data) const;
+    /// @return number of nodes that store the given data
+    int hasData(const T &data) const;
 
 private:
     int size;
@@ -83,8 +83,7 @@ void SList<T>::delFront()
     }
     else
     {
-        const char *msg = "\nSinglyLinked.h delFront()>>> Current SList is empty.\n";
-        throw msg;
+        throw std::logic_error("\nSinglyLinked.h delFront()>>> Current SList is empty.\n");
     }
 }
 
@@ -97,8 +96,7 @@ const T &SList<T>::getFront() const
     }
     else
     {
-        const char *msg = "\nSinglyLinked.h getFront()>>> Current SList is empty.\n";
-        throw msg;
+        throw std::logic_error("\nSinglyLinked.h getFront()>>> Current SList is empty.\n");
     }
 }
 
@@ -115,25 +113,23 @@ bool SList<T>::isEmpty() const
 }
 
 template <typename T>
-bool SList<T>::hasData(const T &data) const
+int SList<T>::hasData(const T &data) const
 {
-    bool flag = false;
+    int count = 0;
     SNode<T> *ptr = this->head;
     if (this->isEmpty())
     {
-        const char *msg = "\nSinglyLinked.h hasData()>>> Current SList is empty.\n";
-        throw msg;
+        throw std::logic_error("\nSinglyLinked.h hasData()>>> Current SList is empty.\n");
     }
     while (ptr != NULL)
     {
         if (data == ptr->data)
         {
-            flag = true;
-            break;
+            count++;
         }
         ptr = ptr->next;
     }
-    return flag;
+    return count;
 }
 
 #endif
