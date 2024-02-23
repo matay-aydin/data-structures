@@ -1,0 +1,1 @@
+Both keys are pangrams. Each key contains all the english letters.
